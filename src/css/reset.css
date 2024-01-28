@@ -9,6 +9,57 @@ p {
   margin: 0;
 }
 
+.list {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+.link-task{
+  position: absolute;
+  top: 20px;
+  left: 20px;
+ }
+
+
+.link {
+ 
+  text-decoration: none;
+  display: flex;
+  padding: 8px 16px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 8px;
+  background: #4E75FF;
+  border: transparent;
+  width: 100px;
+  
+  color: #FFF;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.15; 
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  margin-bottom: 8px;
+}
+.link:hover,
+.link:focus {
+background-color: #6C8CFF;
+outline: transparent;
+outline-offset: 4px;
+}
+
+body {
+  background-color: #fff;
+    width: 1158px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
 p:last-child {
   margin-bottom: 0;
 }
@@ -24,12 +75,12 @@ a {
   text-decoration: none;
 }
 
-button {
-  cursor: pointer;
-}
 
 img {
   display: block;
   max-width: 100%;
   height: auto;
 }
+
+
+
