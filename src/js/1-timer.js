@@ -3,6 +3,8 @@ import flatpickr from 'flatpickr';
 // Додатковий імпорт стилів
 import 'flatpickr/dist/flatpickr.min.css';
 
+import iziToast from 'https://cdn.jsdelivr.net/npm/izitoast@1/+esm';
+
 const input = document.querySelector('#datetime-picker');
 
 const dataDays = document.querySelector('span[data-days]');
@@ -25,7 +27,13 @@ const options = {
     const difference = selectedDate - dateNow;
 
     if (difference < 0 && difference < 0) {
-      alert('Please choose a date in the future');
+      iziToast.error({
+        timeout: 5000,
+        position: 'topRight',
+        title: 'Error',
+        message: 'Please choose a date in the future',
+      });
+
       userSelectedDate = 0;
       dataStart.classList.remove('activ');
       dataStart.removeEventListener('click', start);
@@ -34,10 +42,6 @@ const options = {
       dataStart.addEventListener('click', start);
       userSelectedDate = difference;
     }
-
-    // if (selectedDate && difference > 0) {
-
-    // }
   },
 };
 
