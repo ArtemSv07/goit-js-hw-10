@@ -9,6 +9,7 @@ const dataDays = document.querySelector('span[data-days]');
 const dataHours = document.querySelector('span[data-hours]');
 const dataMinutes = document.querySelector('span[data-minutes]');
 const dataSeconds = document.querySelector('span[data-seconds]');
+const dataStart = document.querySelector('button[data-start]');
 
 let userSelectedDate;
 
@@ -18,10 +19,15 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-    console.log(selectedDates[0]);
     const dateNow = Date.now();
-    const selectedDate = selectedDates[0];
-    userSelectedDate = selectedDate - dateNow;
+    let selectedDate = selectedDates[0];
+    let difference = selectedDate - dateNow;
+
+    if (selectedDate && difference > 0) {
+      dataStart.classList.toggle('activ');
+      dataStart.addEventListener('click', start);
+      userSelectedDate = difference;
+    }
   },
 };
 
@@ -67,14 +73,19 @@ function test(value, callback) {
   }
 }
 
-const interval = setInterval(() => {
-  if (userSelectedDate === -1000) {
-    clearInterval(interval);
-  } else {
-    test(userSelectedDate, convertMs);
-    userSelectedDate -= 1000;
-  }
-}, 1000);
+function start() {
+  dataStart.disabled = true;
+  input.disabled = true;
+  dataStart.classList.toggle('activ');
+  const interval = setInterval(() => {
+    if (userSelectedDate < 0) {
+      clearInterval(interval);
+    } else {
+      test(userSelectedDate, convertMs);
+      userSelectedDate -= 1000;
+    }
+  }, 1000);
+}
 
 //   function addLeadingZero(value) {
 //      [padStart()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padStart)
