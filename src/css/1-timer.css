@@ -82,3 +82,7 @@ button:focus {
 .activ:focus {
   background: #6c8cff;
 }
+
+.disabled-hover:hover {
+  border-color: #808080;
+}

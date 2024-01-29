@@ -20,14 +20,24 @@ const options = {
   minuteIncrement: 1,
   onClose(selectedDates) {
     const dateNow = Date.now();
-    let selectedDate = selectedDates[0];
-    let difference = selectedDate - dateNow;
 
-    if (selectedDate && difference > 0) {
-      dataStart.classList.toggle('activ');
+    const selectedDate = selectedDates[0];
+    const difference = selectedDate - dateNow;
+
+    if (difference < 0 && difference < 0) {
+      alert('Please choose a date in the future');
+      userSelectedDate = 0;
+      dataStart.classList.remove('activ');
+      dataStart.removeEventListener('click', start);
+    } else {
+      dataStart.classList.add('activ');
       dataStart.addEventListener('click', start);
       userSelectedDate = difference;
     }
+
+    // if (selectedDate && difference > 0) {
+
+    // }
   },
 };
 
@@ -52,7 +62,7 @@ function convertMs(ms) {
   return { days, hours, minutes, seconds };
 }
 
-function test(value, callback) {
+function addLeadingZero(value, callback) {
   const call = callback(value);
   if (userSelectedDate) {
     let days = call.days;
@@ -76,17 +86,15 @@ function test(value, callback) {
 function start() {
   dataStart.disabled = true;
   input.disabled = true;
-  dataStart.classList.toggle('activ');
+
+  dataStart.classList.remove('activ');
+  input.classList.add('disabled-hover');
   const interval = setInterval(() => {
     if (userSelectedDate < 0) {
       clearInterval(interval);
     } else {
-      test(userSelectedDate, convertMs);
+      addLeadingZero(userSelectedDate, convertMs);
       userSelectedDate -= 1000;
     }
   }, 1000);
 }
-
-//   function addLeadingZero(value) {
-//      [padStart()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padStart)
-//   }
