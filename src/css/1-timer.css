@@ -1,4 +1,4 @@
-input {
+#datetime-picker {
   box-sizing: border-box;
 
   width: 272px;
@@ -9,11 +9,11 @@ input {
   outline: none;
 }
 
-input:hover {
+#datetime-picker:hover {
   border-color: #000;
 }
 
-input:focus {
+#datetime-picker:focus {
   border-color: #4e75ff;
 }
 
