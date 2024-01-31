@@ -25,10 +25,11 @@
     <link rel="modulepreload" crossorigin href="/goit-js-hw-10/assets/modulepreload-polyfill-ec808ebb.js">
     <link rel="modulepreload" crossorigin href="/goit-js-hw-10/assets/vendor-651d7991.js">
     <link rel="stylesheet" href="/goit-js-hw-10/assets/vendor-80d0dc0f.css">
-    <link rel="stylesheet" href="/goit-js-hw-10/assets/style-2b761d06.css">
+    <link rel="stylesheet" href="/goit-js-hw-10/assets/style-0b0895ab.css">
   </head>
   <body>
     <a class="link link-task" href="./index.html">Back</a>
+
     <form class="form">
       <label>
         Delay (ms)
@@ -37,12 +38,79 @@
 
       <fieldset>
         <legend>State</legend>
-        <label>
-          <input type="radio" name="state" value="fulfilled" required />
+        <label class="Fulfilled-label label-hover">
+          <svg
+            class="svg"
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            viewBox="0 0 32 32"
+            fill="none"
+          >
+            <rect
+              class="rect-ful rect"
+              x="6.5"
+              y="6.5"
+              width="19"
+              height="19"
+              rx="9.5"
+            />
+
+            <rect
+              class="rect-fulfilled rect-non"
+              x="10"
+              y="10"
+              width="12"
+              height="12"
+              rx="6"
+              fill="#4E75FF"
+            />
+          </svg>
+
+          <input
+            class="rect-non"
+            type="radio"
+            name="state"
+            value="fulfilled"
+            required
+          />
           Fulfilled
         </label>
-        <label>
-          <input type="radio" name="state" value="rejected" required />
+        <label class="Rejected-label label-hover">
+          <svg
+            class="svg"
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            viewBox="0 0 32 32"
+            fill="none"
+          >
+            <rect
+              class="rect-rej rect"
+              x="6.5"
+              y="6.5"
+              width="19"
+              height="19"
+              rx="9.5"
+            />
+
+            <rect
+              class="rect-non rect-rejected"
+              x="10"
+              y="10"
+              width="12"
+              height="12"
+              rx="6"
+              fill="#4E75FF"
+            />
+          </svg>
+          <input
+            class="rect-non"
+            type="radio"
+            name="state"
+            value="rejected"
+            required
+          />
           Rejected
         </label>
       </fieldset>
