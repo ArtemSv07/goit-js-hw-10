@@ -3,44 +3,48 @@ import iziToast from 'izitoast';
 // Додатковий імпорт стилів
 import 'izitoast/dist/css/iziToast.min.css';
 
-const input = document.querySelector('input[type="number"]');
-input.addEventListener('input', () => (delay = input.value));
-
 const form = document.querySelector('.form');
-form.addEventListener('submit', createPromis);
-form.addEventListener('change', changeCheckBox);
+form.addEventListener('submit', addSubmit);
 
-let delay;
-let fulfilledChecked;
+const radioChecked = document.querySelectorAll('input[name="state"]');
 
-function changeCheckBox(event) {
-  if (event.target.value === 'fulfilled' || event.target.value === 'rejected') {
-    fulfilledChecked = event.target.value;
-  }
-}
-
-function createPromis(event) {
+function addSubmit(event) {
   event.preventDefault();
 
+  const input = document.querySelector('input[type="number"]');
+
+  const delay = input.value;
+  let fulfilledChecked;
+
+  radioChecked.forEach(radio => {
+    if (radio.checked) {
+      fulfilledChecked = radio.value;
+    }
+  });
+
+  createPromis(delay, fulfilledChecked);
+}
+
+function createPromis(delay, fulfilledChecked) {
   const getUserPromise = new Promise((resolve, reject) => {
     setTimeout(() => {
       if (fulfilledChecked === 'fulfilled') {
-        resolve();
+        resolve(delay);
       } else if (fulfilledChecked === 'rejected') {
-        reject();
+        reject(delay);
       }
     }, delay);
   });
 
   getUserPromise
-    .then(() => {
+    .then(delay => {
       iziToast.success({
         timeout: 5000,
         position: 'topRight',
         message: `✅ Fulfilled promise in ${delay}ms`,
       });
     })
-    .catch(() => {
+    .catch(delay => {
       iziToast.error({
         timeout: 5000,
         position: 'topRight',
@@ -56,11 +60,28 @@ const rectFull = document.querySelector('.rect-ful');
 const rectRej = document.querySelector('.rect-rej');
 let checkedRadio = '';
 
-const FulfilledLabel = document.querySelector('.Fulfilled-label');
-FulfilledLabel.addEventListener('click', clickFulfilled);
+form.addEventListener('click', clickradio);
 
-const rejectedLabel = document.querySelector('.Rejected-label');
-rejectedLabel.addEventListener('click', clickFulRejected);
+function clickradio(event) {
+  radioChecked.forEach(radio => {
+    if (radio.checked) {
+      if (radio.value === 'fulfilled') {
+        clickFulfilled();
+      } else if (radio.value === 'rejected') {
+        clickFulRejected();
+      }
+    }
+  });
+
+  if (event.target.nodeName === 'BUTTON') {
+    if (checkedRadio === '') {
+      iziToast.warning({
+        position: 'bottomLeft',
+        message: 'Choose Fulfilled or Rejected',
+      });
+    }
+  }
+}
 
 function clickFulfilled() {
   rectFulfilled.classList.replace('rect-non', 'rect-on');
@@ -77,13 +98,3 @@ function clickFulRejected() {
   rectRej.classList.replace('rect', 'rect-blue');
   checkedRadio = 'on';
 }
-
-const button = document.querySelector('button[type="submit"]');
-button.addEventListener('click', () => {
-  if (checkedRadio === '') {
-    iziToast.warning({
-      position: 'bottomLeft',
-      message: 'Choose Fulfilled or Rejected',
-    });
-  }
-});
