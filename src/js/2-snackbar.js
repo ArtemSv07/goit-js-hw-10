@@ -48,3 +48,42 @@ function createPromis(event) {
       });
     });
 }
+///////////////////// radio style ///////////////////////
+
+const rectFulfilled = document.querySelector('.rect-fulfilled');
+const rectRejected = document.querySelector('.rect-rejected');
+const rectFull = document.querySelector('.rect-ful');
+const rectRej = document.querySelector('.rect-rej');
+let checkedRadio = '';
+
+const FulfilledLabel = document.querySelector('.Fulfilled-label');
+FulfilledLabel.addEventListener('click', clickFulfilled);
+
+const rejectedLabel = document.querySelector('.Rejected-label');
+rejectedLabel.addEventListener('click', clickFulRejected);
+
+function clickFulfilled() {
+  rectFulfilled.classList.replace('rect-non', 'rect-on');
+  rectRejected.classList.replace('rect-on', 'rect-non');
+  rectFull.classList.replace('rect', 'rect-blue');
+  rectRej.classList.replace('rect-blue', 'rect');
+  checkedRadio = 'on';
+}
+
+function clickFulRejected() {
+  rectFulfilled.classList.replace('rect-on', 'rect-non');
+  rectRejected.classList.replace('rect-non', 'rect-on');
+  rectFull.classList.replace('rect-blue', 'rect');
+  rectRej.classList.replace('rect', 'rect-blue');
+  checkedRadio = 'on';
+}
+
+const button = document.querySelector('button[type="submit"]');
+button.addEventListener('click', () => {
+  if (checkedRadio === '') {
+    iziToast.warning({
+      position: 'bottomLeft',
+      message: 'Choose Fulfilled or Rejected',
+    });
+  }
+});
